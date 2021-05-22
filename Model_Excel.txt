@@ -1,0 +1,252 @@
+## DATASET INFO ##
+.. _breast_cancer_dataset:
+
+Breast cancer wisconsin (diagnostic) dataset
+--------------------------------------------
+
+**Data Set Characteristics:**
+
+    :Number of Instances: 569
+
+    :Number of Attributes: 30 numeric, predictive attributes and the class
+
+    :Attribute Information:
+        - radius (mean of distances from center to points on the perimeter)
+        - texture (standard deviation of gray-scale values)
+        - perimeter
+        - area
+        - smoothness (local variation in radius lengths)
+        - compactness (perimeter^2 / area - 1.0)
+        - concavity (severity of concave portions of the contour)
+        - concave points (number of concave portions of the contour)
+        - symmetry
+        - fractal dimension ("coastline approximation" - 1)
+
+        The mean, standard error, and "worst" or largest (mean of the three
+        worst/largest values) of these features were computed for each image,
+        resulting in 30 features.  For instance, field 0 is Mean Radius, field
+        10 is Radius SE, field 20 is Worst Radius.
+
+        - class:
+                - WDBC-Malignant
+                - WDBC-Benign
+
+    :Summary Statistics:
+
+    ===================================== ====== ======
+                                           Min    Max
+    ===================================== ====== ======
+    radius (mean):                        6.981  28.11
+    texture (mean):                       9.71   39.28
+    perimeter (mean):                     43.79  188.5
+    area (mean):                          143.5  2501.0
+    smoothness (mean):                    0.053  0.163
+    compactness (mean):                   0.019  0.345
+    concavity (mean):                     0.0    0.427
+    concave points (mean):                0.0    0.201
+    symmetry (mean):                      0.106  0.304
+    fractal dimension (mean):             0.05   0.097
+    radius (standard error):              0.112  2.873
+    texture (standard error):             0.36   4.885
+    perimeter (standard error):           0.757  21.98
+    area (standard error):                6.802  542.2
+    smoothness (standard error):          0.002  0.031
+    compactness (standard error):         0.002  0.135
+    concavity (standard error):           0.0    0.396
+    concave points (standard error):      0.0    0.053
+    symmetry (standard error):            0.008  0.079
+    fractal dimension (standard error):   0.001  0.03
+    radius (worst):                       7.93   36.04
+    texture (worst):                      12.02  49.54
+    perimeter (worst):                    50.41  251.2
+    area (worst):                         185.2  4254.0
+    smoothness (worst):                   0.071  0.223
+    compactness (worst):                  0.027  1.058
+    concavity (worst):                    0.0    1.252
+    concave points (worst):               0.0    0.291
+    symmetry (worst):                     0.156  0.664
+    fractal dimension (worst):            0.055  0.208
+    ===================================== ====== ======
+
+    :Missing Attribute Values: None
+
+    :Class Distribution: 212 - Malignant, 357 - Benign
+
+    :Creator:  Dr. William H. Wolberg, W. Nick Street, Olvi L. Mangasarian
+
+    :Donor: Nick Street
+
+    :Date: November, 1995
+
+This is a copy of UCI ML Breast Cancer Wisconsin (Diagnostic) datasets.
+https://goo.gl/U2Uwz2
+
+Features are computed from a digitized image of a fine needle
+aspirate (FNA) of a breast mass.  They describe
+characteristics of the cell nuclei present in the image.
+
+Separating plane described above was obtained using
+Multisurface Method-Tree (MSM-T) [K. P. Bennett, "Decision Tree
+Construction Via Linear Programming." Proceedings of the 4th
+Midwest Artificial Intelligence and Cognitive Science Society,
+pp. 97-101, 1992], a classification method which uses linear
+programming to construct a decision tree.  Relevant features
+were selected using an exhaustive search in the space of 1-4
+features and 1-3 separating planes.
+
+The actual linear program used to obtain the separating plane
+in the 3-dimensional space is that described in:
+[K. P. Bennett and O. L. Mangasarian: "Robust Linear
+Programming Discrimination of Two Linearly Inseparable Sets",
+Optimization Methods and Software 1, 1992, 23-34].
+
+This database is also available through the UW CS ftp server:
+
+ftp ftp.cs.wisc.edu
+cd math-prog/cpo-dataset/machine-learn/WDBC/
+
+.. topic:: References
+
+   - W.N. Street, W.H. Wolberg and O.L. Mangasarian. Nuclear feature extraction 
+     for breast tumor diagnosis. IS&T/SPIE 1993 International Symposium on 
+     Electronic Imaging: Science and Technology, volume 1905, pages 861-870,
+     San Jose, CA, 1993.
+   - O.L. Mangasarian, W.N. Street and W.H. Wolberg. Breast cancer diagnosis and 
+     prognosis via linear programming. Operations Research, 43(4), pages 570-577, 
+     July-August 1995.
+   - W.H. Wolberg, W.N. Street, and O.L. Mangasarian. Machine learning techniques
+     to diagnose breast cancer from fine-needle aspirates. Cancer Letters 77 (1994) 
+     163-171.
+
+
+
+## MODEL SUMMARY ##
+Model: "sequential"
+_________________________________________________________________
+Layer (type)                 Output Shape              Param #   
+=================================================================
+conv1d (Conv1D)              (None, 29, 32)            96        
+_________________________________________________________________
+batch_normalization (BatchNo (None, 29, 32)            128       
+_________________________________________________________________
+dropout (Dropout)            (None, 29, 32)            0         
+_________________________________________________________________
+conv1d_1 (Conv1D)            (None, 28, 64)            4160      
+_________________________________________________________________
+batch_normalization_1 (Batch (None, 28, 64)            256       
+_________________________________________________________________
+dropout_1 (Dropout)          (None, 28, 64)            0         
+_________________________________________________________________
+flatten (Flatten)            (None, 1792)              0         
+_________________________________________________________________
+dense (Dense)                (None, 64)                114752    
+_________________________________________________________________
+dropout_2 (Dropout)          (None, 64)                0         
+_________________________________________________________________
+dense_1 (Dense)              (None, 1)                 65        
+=================================================================
+Total params: 119,457
+Trainable params: 119,265
+Non-trainable params: 192
+
+## BUILDING MODEL BY RUNNING 50 EPOCHS WITH 15 STEPS EACH ##
+Epoch 1/50
+15/15 [==============================] - 6s 143ms/step - loss: 1.0901 - accuracy: 0.5448 - val_loss: 0.6682 - val_accuracy: 0.6930
+Epoch 2/50
+15/15 [==============================] - 0s 13ms/step - loss: 0.7488 - accuracy: 0.6824 - val_loss: 0.6148 - val_accuracy: 0.7193
+Epoch 3/50
+15/15 [==============================] - 0s 13ms/step - loss: 0.5676 - accuracy: 0.7409 - val_loss: 0.5716 - val_accuracy: 0.7281
+Epoch 4/50
+15/15 [==============================] - 0s 12ms/step - loss: 0.4795 - accuracy: 0.8279 - val_loss: 0.5379 - val_accuracy: 0.7281
+Epoch 5/50
+15/15 [==============================] - 0s 14ms/step - loss: 0.5420 - accuracy: 0.7636 - val_loss: 0.5079 - val_accuracy: 0.7193
+Epoch 6/50
+15/15 [==============================] - 0s 14ms/step - loss: 0.4224 - accuracy: 0.8153 - val_loss: 0.4815 - val_accuracy: 0.7368
+Epoch 7/50
+15/15 [==============================] - 0s 14ms/step - loss: 0.4416 - accuracy: 0.8198 - val_loss: 0.4606 - val_accuracy: 0.7368
+Epoch 8/50
+15/15 [==============================] - 0s 14ms/step - loss: 0.3293 - accuracy: 0.8462 - val_loss: 0.4388 - val_accuracy: 0.7456
+Epoch 9/50
+15/15 [==============================] - 0s 13ms/step - loss: 0.2332 - accuracy: 0.8978 - val_loss: 0.4170 - val_accuracy: 0.7719
+Epoch 10/50
+15/15 [==============================] - 0s 9ms/step - loss: 0.2885 - accuracy: 0.8780 - val_loss: 0.3933 - val_accuracy: 0.8070
+Epoch 11/50
+15/15 [==============================] - 0s 9ms/step - loss: 0.2724 - accuracy: 0.8944 - val_loss: 0.3718 - val_accuracy: 0.8246
+Epoch 12/50
+15/15 [==============================] - 0s 9ms/step - loss: 0.2574 - accuracy: 0.8923 - val_loss: 0.3510 - val_accuracy: 0.8421
+Epoch 13/50
+15/15 [==============================] - 0s 9ms/step - loss: 0.2146 - accuracy: 0.9202 - val_loss: 0.3319 - val_accuracy: 0.8684
+Epoch 14/50
+15/15 [==============================] - 0s 9ms/step - loss: 0.2229 - accuracy: 0.8997 - val_loss: 0.3106 - val_accuracy: 0.8684
+Epoch 15/50
+15/15 [==============================] - 0s 8ms/step - loss: 0.1988 - accuracy: 0.9080 - val_loss: 0.2905 - val_accuracy: 0.8684
+Epoch 16/50
+15/15 [==============================] - 0s 8ms/step - loss: 0.1735 - accuracy: 0.9320 - val_loss: 0.2672 - val_accuracy: 0.8772
+Epoch 17/50
+15/15 [==============================] - 0s 8ms/step - loss: 0.1844 - accuracy: 0.9322 - val_loss: 0.2468 - val_accuracy: 0.8860
+Epoch 18/50
+15/15 [==============================] - 0s 9ms/step - loss: 0.2113 - accuracy: 0.9222 - val_loss: 0.2293 - val_accuracy: 0.8860
+Epoch 19/50
+15/15 [==============================] - 0s 8ms/step - loss: 0.1818 - accuracy: 0.9403 - val_loss: 0.2142 - val_accuracy: 0.9123
+Epoch 20/50
+15/15 [==============================] - 0s 8ms/step - loss: 0.1434 - accuracy: 0.9447 - val_loss: 0.2010 - val_accuracy: 0.9298
+Epoch 21/50
+15/15 [==============================] - 0s 10ms/step - loss: 0.2317 - accuracy: 0.9103 - val_loss: 0.1887 - val_accuracy: 0.9298
+Epoch 22/50
+15/15 [==============================] - 0s 9ms/step - loss: 0.2249 - accuracy: 0.9230 - val_loss: 0.1750 - val_accuracy: 0.9561
+Epoch 23/50
+15/15 [==============================] - 0s 11ms/step - loss: 0.1457 - accuracy: 0.9443 - val_loss: 0.1656 - val_accuracy: 0.9649
+Epoch 24/50
+15/15 [==============================] - 0s 9ms/step - loss: 0.1655 - accuracy: 0.9521 - val_loss: 0.1565 - val_accuracy: 0.9649
+Epoch 25/50
+15/15 [==============================] - 0s 8ms/step - loss: 0.1308 - accuracy: 0.9365 - val_loss: 0.1471 - val_accuracy: 0.9649
+Epoch 26/50
+15/15 [==============================] - 0s 12ms/step - loss: 0.1752 - accuracy: 0.9349 - val_loss: 0.1398 - val_accuracy: 0.9649
+Epoch 27/50
+15/15 [==============================] - 0s 13ms/step - loss: 0.1673 - accuracy: 0.9295 - val_loss: 0.1341 - val_accuracy: 0.9649
+Epoch 28/50
+15/15 [==============================] - 0s 13ms/step - loss: 0.1646 - accuracy: 0.9378 - val_loss: 0.1301 - val_accuracy: 0.9649
+Epoch 29/50
+15/15 [==============================] - 0s 13ms/step - loss: 0.2367 - accuracy: 0.9175 - val_loss: 0.1246 - val_accuracy: 0.9737
+Epoch 30/50
+15/15 [==============================] - 0s 13ms/step - loss: 0.1549 - accuracy: 0.9458 - val_loss: 0.1212 - val_accuracy: 0.9737
+Epoch 31/50
+15/15 [==============================] - 0s 11ms/step - loss: 0.1075 - accuracy: 0.9574 - val_loss: 0.1189 - val_accuracy: 0.9737
+Epoch 32/50
+15/15 [==============================] - 0s 12ms/step - loss: 0.1671 - accuracy: 0.9515 - val_loss: 0.1168 - val_accuracy: 0.9737
+Epoch 33/50
+15/15 [==============================] - 0s 14ms/step - loss: 0.1162 - accuracy: 0.9467 - val_loss: 0.1141 - val_accuracy: 0.9737
+Epoch 34/50
+15/15 [==============================] - 0s 14ms/step - loss: 0.1699 - accuracy: 0.9439 - val_loss: 0.1120 - val_accuracy: 0.9737
+Epoch 35/50
+15/15 [==============================] - 0s 14ms/step - loss: 0.1364 - accuracy: 0.9375 - val_loss: 0.1101 - val_accuracy: 0.9649
+Epoch 36/50
+15/15 [==============================] - 0s 13ms/step - loss: 0.1456 - accuracy: 0.9356 - val_loss: 0.1084 - val_accuracy: 0.9649
+Epoch 37/50
+15/15 [==============================] - 0s 13ms/step - loss: 0.1244 - accuracy: 0.9485 - val_loss: 0.1079 - val_accuracy: 0.9649
+Epoch 38/50
+15/15 [==============================] - 0s 13ms/step - loss: 0.1227 - accuracy: 0.9485 - val_loss: 0.1077 - val_accuracy: 0.9649
+Epoch 39/50
+15/15 [==============================] - 0s 14ms/step - loss: 0.1010 - accuracy: 0.9510 - val_loss: 0.1072 - val_accuracy: 0.9649
+Epoch 40/50
+15/15 [==============================] - 0s 14ms/step - loss: 0.1121 - accuracy: 0.9504 - val_loss: 0.1067 - val_accuracy: 0.9649
+Epoch 41/50
+15/15 [==============================] - 0s 14ms/step - loss: 0.1090 - accuracy: 0.9506 - val_loss: 0.1056 - val_accuracy: 0.9649
+Epoch 42/50
+15/15 [==============================] - 0s 12ms/step - loss: 0.1192 - accuracy: 0.9428 - val_loss: 0.1055 - val_accuracy: 0.9649
+Epoch 43/50
+15/15 [==============================] - 0s 9ms/step - loss: 0.1096 - accuracy: 0.9558 - val_loss: 0.1061 - val_accuracy: 0.9649
+Epoch 44/50
+15/15 [==============================] - 0s 8ms/step - loss: 0.0824 - accuracy: 0.9747 - val_loss: 0.1062 - val_accuracy: 0.9649
+Epoch 45/50
+15/15 [==============================] - 0s 9ms/step - loss: 0.1324 - accuracy: 0.9563 - val_loss: 0.1059 - val_accuracy: 0.9649
+Epoch 46/50
+15/15 [==============================] - 0s 9ms/step - loss: 0.0858 - accuracy: 0.9619 - val_loss: 0.1053 - val_accuracy: 0.9737
+Epoch 47/50
+15/15 [==============================] - 0s 9ms/step - loss: 0.0866 - accuracy: 0.9621 - val_loss: 0.1046 - val_accuracy: 0.9649
+Epoch 48/50
+15/15 [==============================] - 0s 10ms/step - loss: 0.1284 - accuracy: 0.9573 - val_loss: 0.1052 - val_accuracy: 0.9649
+Epoch 49/50
+15/15 [==============================] - 0s 9ms/step - loss: 0.1286 - accuracy: 0.9706 - val_loss: 0.1051 - val_accuracy: 0.9649
+Epoch 50/50
+15/15 [==============================] - 0s 9ms/step - loss: 0.1120 - accuracy: 0.9661 - val_loss: 0.1050 - val_accuracy: 0.9649
